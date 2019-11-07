@@ -1,8 +1,9 @@
 import { makeSourceType, makeSourceProps } from '../../source/entities/source';
+import { sanitizeType } from '../../utils/sanitize/sanitize';
 
 export interface buildMakeCommentProps {
     makeSource: makeSourceType,
-    sanitize: (text: string) => string
+    sanitize: sanitizeType
 }
 
 export interface makeCommentProps {
