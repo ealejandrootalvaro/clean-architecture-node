@@ -1,14 +1,14 @@
-export interface insertProps {
+export interface CommentDbProps {
     author: string,
     text: string
 }
 
-export interface DbProps {
-    insert: (commentInfo: insertProps) => void
+export interface DbProps<T> {
+    insert: (commentInfo: T) => void
 }
 
 export interface makeCommentsDbProps {
-    makeDb: () => DbProps
+    makeDb: () => DbProps<CommentDbProps>
 }
 
 export default function makeCommentsDb ({ makeDb } : makeCommentsDbProps ) {
@@ -16,7 +16,7 @@ export default function makeCommentsDb ({ makeDb } : makeCommentsDbProps ) {
         insert
     }
 
-    function insert(commentInfo: insertProps) {
+    function insert(commentInfo: CommentDbProps) {
         const db = makeDb();
         db.insert(commentInfo);
     }

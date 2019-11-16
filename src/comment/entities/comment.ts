@@ -12,6 +12,9 @@ export interface makeCommentProps {
     text: string
 }
 
+export const deletedText = '.xX This comment has been deleted Xx.';
+export const deletedAuthor = 'deleted'
+
 export default function buildMakeComment({makeSource, sanitize} : buildMakeCommentProps ) {
     return function makeComment({
         author,
@@ -20,12 +23,16 @@ export default function buildMakeComment({makeSource, sanitize} : buildMakeComme
     } : makeCommentProps ) {
         
         const validSource = makeSource(source);
-        const sanitizedText = sanitize(text).trim();
+        let sanitizedText = sanitize(text).trim();
 
         return {
             getAuthor: () => author,
             getSource: () => validSource,
-            getText: () => sanitizedText
+            getText: () => sanitizedText,
+            markDeleted: () => {
+                sanitizedText = deletedText;
+                author = deletedAuthor
+            }
         }
 
     }

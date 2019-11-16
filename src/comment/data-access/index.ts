@@ -1,14 +1,14 @@
-import makeCommentsDb, {insertProps} from './comments-db';
+import makeCommentsDb, {CommentDbProps} from './comments-db';
 
 function makeDb() {
 
-    let comments : Array<insertProps> = [];
+    let comments : Array<CommentDbProps> = [];
     
     return {
         insert
     }
 
-    function insert(commentInfo: insertProps) {
+    function insert(commentInfo: CommentDbProps) {
         const newComnent = { ...commentInfo };
         comments.push(newComnent);
     }
